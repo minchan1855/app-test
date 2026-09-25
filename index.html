@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>냥이마음 사전 | 고양이 기분·상태 인터랙티브 도감</title>
+  <meta name="description" content="꼬리, 귀, 자세, 눈빛으로 읽는 우리 고양이의 심리 상태와 집사 대처 가이드">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+</head>
+<body>
+
+  <!-- 상단 헤더 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" id="brand-logo">
+        <div class="brand-icon-box">🐾</div>
+        <div>
+          <div class="brand-title">
+            냥이마음 사전
+            <span class="brand-badge">인터랙티브 도감</span>
+          </div>
+          <div class="brand-desc">고양이 신체 언어 & 기분 분석 가이드</div>
+        </div>
+      </div>
+
+      <!-- 네비게이션 탭 -->
+      <nav class="nav-tabs" aria-label="메인 탭 메뉴">
+        <button class="nav-tab-btn active" data-tab="explorer" id="tab-btn-explorer">
+          <span>📖 도감 탐색</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="diagnosis" id="tab-btn-diagnosis">
+          <span>🔮 기분 진단기</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="bookmarks" id="tab-btn-bookmarks">
+          <span>💖 즐겨찾기</span>
+          <span class="tab-badge" id="bookmark-count-badge">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ====================================================================
+         1. 도감 탐색 뷰 (Explorer View)
+         ==================================================================== -->
+    <div id="explorer-view" class="view-section">
+      <!-- 히어로 배너 -->
+      <section class="hero-section">
+        <div class="hero-pill">✨ 고양이 행동 심리학 기반 15가지 핵심 시그널</div>
+        <h1 class="hero-title">우리 집 고양이는 <span>지금 어떤 기분</span>일까요?</h1>
+        <p class="hero-subtitle">꼬리 모양, 귀 각도, 동공 크기와 울음소리 속에 담긴 냥이의 진짜 속마음을 확인하고 맞춤형 집사 대처법을 배워보세요.</p>
+      </section>
+
+      <!-- 검색 및 필터 컨트롤 패널 -->
+      <section class="controls-card">
+        <!-- 검색창 -->
+        <div class="search-row">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="행동이나 키워드를 검색해보세요 (예: 식빵, 하악질, 꼬리, 골골송, 궁디...)" 
+              autocomplete="off"
+            >
+            <button class="search-clear-btn" id="search-clear-btn" title="검색어 지우기">✕</button>
+          </div>
+        </div>
+
+        <!-- 감정 카테고리 필터 -->
+        <div class="filter-group">
+          <div class="filter-label">🏷️ 감정 카테고리</div>
+          <div class="category-chips" id="category-chips-container">
+            <!-- JS로 동적 렌더링 -->
+          </div>
+        </div>
+
+        <!-- 신체 부위별 필터 -->
+        <div class="filter-group">
+          <div class="filter-label">🔍 신체 부위별 빠른 필터</div>
+          <div class="bodypart-chips" id="bodypart-chips-container">
+            <!-- JS로 동적 렌더링 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 결과 카운트 및 초기화 버튼 -->
+      <div class="results-header">
+        <div class="results-count" id="results-count-text">
+          총 <strong>15</strong>개의 고양이 상태를 탐색 중입니다.
+        </div>
+        <button class="reset-filters-btn" id="reset-filters-btn">필터 초기화 ↺</button>
+      </div>
+
+      <!-- 카드 그리드 컨테이너 -->
+      <div class="cards-grid" id="cards-grid">
+        <!-- JS로 동적 렌더링 -->
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         2. 기분 자가진단 퀴즈 뷰 (Diagnosis View)
+         ==================================================================== -->
+    <div id="diagnosis-view" class="diagnosis-container">
+      <div class="hero-section" style="padding-top: 20px;">
+        <div class="hero-pill">🔮 30초 맞춤형 행동 분석</div>
+        <h2 class="hero-title">지금 우리 냥이 <span>심리 상태 진단기</span></h2>
+        <p class="hero-subtitle">고양이가 보여주는 꼬리, 귀, 자세, 소리를 선택하면 가장 일치하는 기분과 즉시 취해야 할 행동 요령을 분석해드립니다.</p>
+      </div>
+
+      <div class="quiz-card" id="quiz-card">
+        <!-- 퀴즈 진행도 -->
+        <div class="quiz-step-info">
+          <span id="quiz-step-text">STEP 1 / 4</span>
+          <span id="quiz-category-tag">꼬리 관찰</span>
+        </div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress-fill" style="width: 25%;"></div>
+        </div>
+
+        <!-- 질문 내용 -->
+        <h3 class="quiz-question-title" id="quiz-question-title">현재 고양이의 꼬리 상태는 어떤가요?</h3>
+
+        <!-- 보기 목록 -->
+        <div class="quiz-options-list" id="quiz-options-list">
+          <!-- JS로 동적 렌더링 -->
+        </div>
+
+        <!-- 퀴즈 하단 네비게이션 -->
+        <div class="quiz-nav-row">
+          <button class="btn-secondary" id="quiz-prev-btn" style="visibility: hidden;">이전 단계</button>
+          <button class="btn-secondary" id="quiz-restart-btn">처음부터 다시</button>
+        </div>
+      </div>
+
+      <!-- 진단 결과 카드 (완료 시 표시) -->
+      <div class="quiz-card result-card" id="quiz-result-card" style="display: none;">
+        <span class="result-badge">🎉 진단 분석 완료</span>
+        <h3 class="result-main-title" id="result-cat-name">골골송 & 눈키스</h3>
+        <p class="result-match-rate" id="result-match-rate">일치도 95% · 매우 안정되고 행복한 상태</p>
+
+        <!-- 결과 아트 박스 -->
+        <div class="result-art-box" id="result-art-box"></div>
+
+        <!-- 한 줄 요약 및 핵심 대처법 -->
+        <div class="card-tagline" id="result-tagline" style="margin: 0 auto 20px; max-width: 500px;"></div>
+
+        <div class="guide-box do-box" style="text-align: left; max-width: 560px; margin: 0 auto 24px;">
+          <div class="guide-title">💡 집사 추천 행동 요령</div>
+          <div id="result-advice-text" style="font-size: 14px; line-height: 1.6;"></div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn-secondary" id="result-retry-btn">다시 진단하기 ↺</button>
+          <button class="btn-primary" id="result-view-detail-btn">도감 상세 정보 보기 ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         3. 즐겨찾기 뷰 (Bookmarks View)
+         ==================================================================== -->
+    <div id="bookmarks-view" class="view-section" style="display: none;">
+      <section class="hero-section" style="padding-top: 20px;">
+        <div class="hero-pill">💖 나의 보관함</div>
+        <h2 class="hero-title">자주 찾아보는 <span>냥이 마음 리스트</span></h2>
+        <p class="hero-subtitle">카드의 하트 아이콘을 누르면 언제든 빠르게 확인할 수 있도록 이곳에 저장됩니다.</p>
+      </section>
+
+      <div class="cards-grid" id="bookmarks-grid">
+        <!-- JS로 동적 렌더링 -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       상세 팝업 모달 (Detail Modal)
+       ==================================================================== -->
+  <div class="modal-overlay" id="detail-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn" title="닫기 (ESC)">✕</button>
+      
+      <!-- 상단 아트 영역 -->
+      <div class="modal-header-art" id="modal-art-box">
+        <!-- SVG 주입 -->
+      </div>
+
+      <!-- 모달 본문 -->
+      <div class="modal-body">
+        <div class="modal-title-row">
+          <span class="brand-badge" id="modal-category-badge" style="margin-bottom: 8px; display: inline-block;">행복·편안</span>
+          <h2 class="modal-title" id="modal-title">상태명</h2>
+          <div class="card-subtitle" id="modal-subtitle">부제목</div>
+        </div>
+
+        <div class="modal-tagline" id="modal-tagline">"집사야 나 지금 너무 좋아~"</div>
+
+        <!-- 기분 게이지 (에너지 & 긴장도) -->
+        <div class="meter-row">
+          <div class="meter-item">
+            <div class="meter-header">
+              <span>⚡ 활동 에너지 레벨</span>
+              <span id="modal-energy-text">3 / 5</span>
+            </div>
+            <div class="meter-bar">
+              <div class="meter-fill" id="modal-energy-fill" style="width: 60%; background: #FFA45B;"></div>
+            </div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header">
+              <span>⚠️ 긴장 & 스트레스 지수</span>
+              <span id="modal-tension-text">1 / 5</span>
+            </div>
+            <div class="meter-bar">
+              <div class="meter-fill" id="modal-tension-fill" style="width: 20%; background: #58B19F;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부위별 신체 언어 체크리스트 -->
+        <div class="section-title">🔍 부위별 신체 언어 관찰 가이드</div>
+        <div class="body-parts-table">
+          <div class="body-part-row">
+            <div class="part-header">🐈 꼬리 (Tail)</div>
+            <div class="part-desc" id="modal-tail-desc">꼬리 설명</div>
+          </div>
+          <div class="body-part-row">
+            <div class="part-header">👂 귀 (Ears)</div>
+            <div class="part-desc" id="modal-ears-desc">귀 설명</div>
+          </div>
+          <div class="body-part-row">
+            <div class="part-header">👀 눈 (Eyes)</div>
+            <div class="part-desc" id="modal-eyes-desc">눈 설명</div>
+          </div>
+          <div class="body-part-row">
+            <div class="part-header">🧘 자세 (Body)</div>
+            <div class="part-desc" id="modal-posture-desc">자세 설명</div>
+          </div>
+          <div class="body-part-row">
+            <div class="part-header">📢 소리 (Vocal)</div>
+            <div class="part-desc" id="modal-vocal-desc">소리 설명</div>
+          </div>
+        </div>
+
+        <!-- 집사 행동 가이드 (Do & Don't) -->
+        <div class="section-title">💡 집사 행동 수칙 (Do & Don't)</div>
+        <div class="guide-grid">
+          <div class="guide-box do-box">
+            <div class="guide-title">추천 행동 (DO)</div>
+            <ul class="guide-list" id="modal-dos-list"></ul>
+          </div>
+          <div class="guide-box dont-box">
+            <div class="guide-title">피해야 할 행동 (DON'T)</div>
+            <ul class="guide-list" id="modal-donts-list"></ul>
+          </div>
+        </div>
+
+        <!-- 흔한 오해와 진실 (Myth Buster) -->
+        <div class="myth-card">
+          <div class="myth-header">🐾 집사가 흔히 하는 오해와 진실!</div>
+          <div class="myth-content" id="modal-myth-desc">오해 내용</div>
+        </div>
+
+        <!-- 모달 푸터 버튼 -->
+        <div class="modal-footer">
+          <button class="btn-secondary" id="modal-bookmark-toggle-btn">💖 즐겨찾기 담기</button>
+          <button class="btn-secondary" id="modal-share-btn">🔗 링크 공유</button>
+          <button class="btn-primary" id="modal-confirm-btn">확인 완료</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 메시지 알림 -->
+  <div class="toast-msg" id="toast-msg">
+    <span>🐾</span>
+    <span id="toast-text">알림 내용</span>
+  </div>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-quote">"고양이는 말을 하지 않지만, 온몸으로 집사에게 진심을 이야기합니다."</div>
+      <p>© 냥이마음 사전 · 고양이 행동 신체 언어 인터랙티브 도감</p>
+      <p style="margin-top: 4px; font-size: 11px; color: var(--text-light);">※ 고양이가 지속적인 통증이나 이상 행동을 보일 경우 반드시 전문 수의사의 진료를 받으시기 바랍니다.</p>
+    </div>
+  </footer>
+
+  <!-- 데이터 및 앱 스크립트 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
